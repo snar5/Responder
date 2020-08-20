@@ -28,7 +28,6 @@ class Server(BaseHTTPRequestHandler):
 	if self.path.endswith(".js"):
 		mimetype = 'application/javascript'
 		path = 'servers' + self.path
-		print path
 		f = open (path)
 		data = f.read()
 		f.close()
@@ -41,7 +40,6 @@ class Server(BaseHTTPRequestHandler):
 	if self.path.endswith(".gif"):
 		mimetype = 'image/gif'
 		path = curdir + sep + self.path
-		print path 
 		f = open (path)
 		self.send_response(200)
 		self.send_header('Content-type', mimetype)
@@ -53,7 +51,6 @@ class Server(BaseHTTPRequestHandler):
 	if self.path.endswith(".css"):
                 mimetype = 'text/css'
                 path = "servers" + self.path
-		print path
                 f = open (path)
                 self.send_response(200)
                 self.send_header('Content-type', mimetype)
@@ -64,7 +61,6 @@ class Server(BaseHTTPRequestHandler):
 	if self.path.endswith(".png"):
                 mimetype = 'image/png'
                 path = 'servers' + self.path
-                print path
 		f = open (path)
                 self.send_response(200)
                 self.send_header('Content-type', mimetype)
@@ -75,7 +71,6 @@ class Server(BaseHTTPRequestHandler):
 
 	if option is None: 
 		self.send_response(200)
-		print "No Options" 
 		self.send_header('Content-type', 'text/html')
 		self.end_headers()
 		#self.wfile.write(page_alt)
@@ -86,7 +81,6 @@ class Server(BaseHTTPRequestHandler):
 	elif option[0] == "clear_poison": # Clear Poison Table
 		self._conn = self._connect_to_database()
 		self._reset_poisoned(self._conn)
-		print "Poison Table Cleared!"
 		self.send_response(200)
                 self.send_header('Content-type','text/html')
                 self.end_headers()
@@ -97,7 +91,6 @@ class Server(BaseHTTPRequestHandler):
 		self.send_response(200) 
 		self.send_header('Content-type','text/html')
 		self.end_headers() 
-		print "Dump Hashes"
 		for rst in rst_hash_dump:
 			self.wfile.write("{0}<br>n".format(rst[0])); 
 		
@@ -107,7 +100,6 @@ class Server(BaseHTTPRequestHandler):
 		self.send_response(200) 
 		self.send_header('Content-type','text/html') 
 		self.end_headers() 
-		print "Listing Captured Creds"
 		self.wfile.write("<table><tr><th>User</th><th>Type</th><th>Client</th><th>Date</th></tr>")
         	for rst in rst_captured_creds:
                 	self.wfile.write("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>".format(rst[0],rst[1],rst[2],rst[3]))
@@ -119,7 +111,6 @@ class Server(BaseHTTPRequestHandler):
 		self.send_response(200)
                 self.send_header('Content-type','text/html')
                 self.end_headers()
-                print "Get Poison Details"
 		self.wfile.write("<table><tr><th>Victim IP</th><th>Number of Poisons</th></tr>")
 		for rst in rst_poison_details:
 			self.wfile.write("<tr><td>{0}</td><td>{1}</td></tr>".format(rst[0],rst[1]))
@@ -131,7 +122,6 @@ class Server(BaseHTTPRequestHandler):
 		self.send_response(200)
                 self.send_header('Content-type','text/html')
                 self.end_headers()
-		print "Get Poison Count"
 		title = ''
 		for rst in rst_poison:
 			title = title + "{0} {1}\n".format(rst[0],rst[1])
