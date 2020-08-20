@@ -258,7 +258,9 @@ def main():
                 #---------------------------------------------------------------
                 
                 import servers.HTTP_Status
-                threads.append(Thread(target=servers.HTTP_Status.run)) 
+                threads.append(Thread(target=servers.HTTP_Status.run))
+                print (color("Status Server Available at https://127.0.0.1:880", 2, 1))
+                print
                 # End Status  Server 
 
 		# Load Browser Listener
