@@ -19,7 +19,7 @@ class Server(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-    def log_messages(self, format, *args):
+    def log_message(self, format, *args):
         return 
 
     def do_GET(self):
