@@ -253,11 +253,18 @@ def main():
 		threads.append(Thread(target=serve_LLMNR_poisoner, args=('', 5355, LLMNR,)))
 		threads.append(Thread(target=serve_MDNS_poisoner,  args=('', 5353, MDNS,)))
 		threads.append(Thread(target=serve_NBTNS_poisoner, args=('', 137,  NBTNS,)))
+                # --------------------------------------------------------------
+                # Status Server Load Here - Remove to turn off
+                #---------------------------------------------------------------
+                
+                import servers.HTTP_Status
+                threads.append(Thread(target=servers.HTTP_Status.run)) 
+                # End Status  Server 
 
 		# Load Browser Listener
 		from servers.Browser import Browser
 		threads.append(Thread(target=serve_thread_udp_broadcast, args=('', 138,  Browser,)))
-
+        
 		if settings.Config.HTTP_On_Off:
 			from servers.HTTP import HTTP
 			threads.append(Thread(target=serve_thread_tcp, args=('', 80, HTTP,)))
